@@ -35,6 +35,7 @@ npm install -g serverless
 ```
 
 After the installation, it is required to login with a AWS Account in the shell. Follow the [serverless guide](https://www.serverless.com/framework/docs/providers/aws/guide/credentials#using-aws-access-keys) for more informations.
+After having performed the login, you just have to execute these commands:
 
 ```
 # Install project dependencies
