@@ -1,0 +1,81 @@
+service: sardinia-rest-service
+
+frameworkVersion: '2'
+
+plugins:
+  - serverless-offline
+
+custom:
+  default_stage: dev
+  default_region: eu-west-1
+  stage: ${opt:stage, self:custom.default_stage}
+  region: ${opt:region, self:custom.default_region}
+  dynamodb_table_points: ${self:custom.stage}-points-of-interest
+  dynamodb_arn_points: arn:aws:dynamodb:${self:custom.region}:*:table/${self:custom.dynamodb_table_points}
+
+provider:
+  name: aws
+  stage: ${self:custom.stage}
+  runtime: nodejs12.x
+  region: ${self:custom.region}
+  lambdaHashingVersion: 20201221
+  environment:
+    REGION: ${self:custom.region}
+    DYNAMODB_TABLE_POINTS: ${self:custom.dynamodb_table_points}
+
+  iamRoleStatements:
+    - Effect: Allow
+      Action:
+        - dynamodb:DescribeTable
+        - dynamodb:Query
+        - dynamodb:Scan
+        - dynamodb:GetItem
+        - dynamodb:PutItem
+        - dynamodb:UpdateItem
+        - dynamodb:DeleteItem
+        - dynamodb:CreateTable
+      Resource: '*'
+
+functions:
+  getAll:
+    handler: functions/getAll.main
+    events:
+      - http:
+          path: points
+          method: get
+          cors: true
+  getOne:
+    handler: functions/getPoint.main
+    events:
+      - http:
+          path: points/{id}
+          method: get
+          cors: true
+  create:
+    handler: functions/createPoint.main
+    events:
+      - http:
+          path: points
+          method: post
+          cors: true
+  update:
+    handler: functions/updatePoint.main
+    events:
+      - http:
+          path: points/{id}
+          method: put
+          cors: true
+  delete:
+    handler: functions/deletePoint.main
+    events:
+      - http:
+          path: points/{id}
+          method: delete
+          cors: true
+  # init:
+  #   handler: functions/init.main
+  #   events:
+  #     - http:
+  #         path: points/init
+  #         method: post
+  #         cors: true

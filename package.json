@@ -1,0 +1,19 @@
+{
+  "name": "rest-node-client",
+  "version": "1.0.0",
+  "description": "",
+  "main": "handler.js",
+  "author": "",
+  "license": "ISC",
+  "dependencies": {
+    "dynamoose": "^2.8.2",
+    "joi": "^17.4.2",
+    "lodash": "^4.17.21",
+    "uuid": "^8.3.2"
+  },
+  "devDependencies": {
+    "aws-sdk": "^2.1011.0",
+    "dotenv": "^10.0.0",
+    "serverless-offline": "8.2.0"
+  }
+}
