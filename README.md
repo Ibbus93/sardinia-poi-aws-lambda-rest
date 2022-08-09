@@ -1,4 +1,4 @@
-# Sardinia Point of Interests - A PoC using AWS Lambda, Serverless framework and Node.JS
+# Sardinia Points of Interest - A PoC using AWS Lambda, Serverless framework and Node.JS
 
 ## What is this project
 This project is a Proof of Concept about using the Amazon Web Services, mainly focusued on serverless, hence AWS Lambda Functions.  
